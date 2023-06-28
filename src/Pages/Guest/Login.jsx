@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 
 export default function Login() {
@@ -10,19 +11,26 @@ export default function Login() {
               <h1 className='text-logo text-white'>ChatJimPT</h1>
             </div>
             <h5 className="text-center text-white">Sign In</h5>
-            <form className="text-center">
+            <form className="text-center my-4">
 
               <div className="mb-3">
-                <input type="email" className="form-control" id="emailInput" placeholder="Email" />
+                <div className="form-floating">
+                  <input type="email" className="form-control" id="email" placeholder="name@example.com" />
+                  <label htmlFor="email">Email</label>
+                </div>
               </div>
               <div className="mb-3">
-                <input type="password" className="form-control" id="passwordInput" placeholder="Password"/>
+                <div className="form-floating">
+                  <input type="password" className="form-control" id="password" placeholder="Password" />
+                  <label htmlFor="password">Password</label>
+                </div>
               </div>
+              <button type="submit" className="btn btn-primary mx-auto">Login</button>
               <p className="forgot"><a href="">Forgot Password?</a></p>
             </form>
           </div>
           <div className="nomember bg-dark">
-            <p className="text-center text-white">Not a member? <a href="">Create an Account</a></p>
+            <p className="text-center text-white">Not a member? <Link to="/sign-up">Create an Account</Link></p>
           </div>
         </div>
         </div>
