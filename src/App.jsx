@@ -1,22 +1,30 @@
 
+import { Navigate, Routes, Route } from 'react-router-dom';
 import './App.css'
-import Login from './Pages/Guest/Login'
-import Register from './Pages/Guest/Register'
-import Dashboard from './Pages/Protected/Dashboard'
 import GuestNav from './components/GuestNav'
 import Nav from './components/Nav'
-import GuestRoute from './routes/GuestRoute'
+import Cookies from 'js-cookie';
+import Dashboard from './Pages/Protected/Dashboard';
+import Register from './Pages/Guest/Register';
+import Login from './Pages/Guest/Login';
+
+
+
 
 function App() {
+  const token = Cookies.get('token');
+  const isAuthenticated = !!token;
+  console.log(isAuthenticated);
   
 
   return (
     <div className='vh-100'>
-      <GuestNav />
-      {/* <Nav /> */}
-      {/* <GuestRoute /> */}
-      <Dashboard />
-        
+        {isAuthenticated ? <Nav /> : <GuestNav />}
+        <Routes>
+          <Route path="/sign-in" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login />} />
+          <Route path="/sign-up" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Register />} />
+          <Route path="/dashboard" element={isAuthenticated ?<Dashboard />: <Navigate to="/sign-in" replace />}/>
+        </Routes>
     </div>
   )
 }
