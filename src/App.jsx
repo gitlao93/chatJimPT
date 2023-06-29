@@ -14,7 +14,8 @@ function App() {
     <div className='vh-100'>
       <GuestNav />
       {/* <Nav /> */}
-      <GuestRoute />
+      {/* <GuestRoute /> */}
+      <Dashboard />
         
     </div>
   )
