@@ -14,7 +14,6 @@ import Login from './Pages/Guest/Login';
 function App() {
   const token = Cookies.get('token');
   const isAuthenticated = !!token;
-  console.log(isAuthenticated);
   
 
   return (

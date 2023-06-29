@@ -13,20 +13,23 @@ export default function Login() {
 
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/login', {
+        headers: {
+          'Accept': 'application/vnd.api+json',
+          'Content-Type': 'application/vnd.api+json',
+        },
         email: email,
         password: password,
       });
 
-      
-
-    // Extract the token from the response
-    const token = response.data.data.token;
+      if (response.status === 202) {
+        const token = response.data.data.token;
+        Cookies.set('token', token);
+        window.location.reload();
+        
+      } else {
+        console.error('Login failed',response.status);
+      }
     
-    // Store the token in a cookie
-    Cookies.set('token', token);
-
-    // Redirect to the dashboard
-    window.location.reload();
     } catch (error) {
       console.error('Error during login:', error);
     }

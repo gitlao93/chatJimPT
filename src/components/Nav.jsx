@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 
 export default function Nav() {
-  // const navigate = useNavigate();
+  
 
   const handleLogout = async () => {
 
@@ -15,23 +15,14 @@ export default function Nav() {
         headers: {
           'Accept': 'application/vnd.api+json',
           'Content-Type': 'application/vnd.api+json',
-          // Include any necessary authorization headers
           Authorization: `Bearer ${Cookies.get('token')}`,
         },
       });
 
-
       if (response.status === 202) {
-        
-        // Clear the token from cookies
         Cookies.remove('token');
-        
-        
         window.location.reload();
-        
       } else {
-        // Handle any error scenarios
-        // Display an error message or perform any other necessary actions
         console.error('Logout failed',response.status);
       }
 
