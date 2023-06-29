@@ -8,7 +8,7 @@ export default function GuestNav() {
           <a className="navbar-brand text-white">ChatJimPT</a>
           <ul className="nav">
             <li className="nav-item">
-              <Link className="nav-link text-white" to="/sign-in">Sign In</Link>
+              <Link className="nav-link text-white" to="/">Sign In</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" to="/sign-up">Sign Up</Link>

@@ -20,9 +20,9 @@ function App() {
     <div className='vh-100'>
         {isAuthenticated ? <Nav /> : <GuestNav />}
         <Routes>
-          <Route path="/sign-in" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login />} />
+          <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login />} />
           <Route path="/sign-up" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Register />} />
-          <Route path="/dashboard" element={isAuthenticated ?<Dashboard />: <Navigate to="/sign-in" replace />}/>
+          <Route path="/dashboard" element={isAuthenticated ?<Dashboard />: <Navigate to="/" replace />}/>
         </Routes>
     </div>
   )

@@ -82,7 +82,7 @@ export default function Register() {
           </form>
         </div>
         <div className="nomember bg-dark">
-          <p className="text-center text-white">Already a member? <Link to="/sign-in">Sign In</Link></p>
+          <p className="text-center text-white">Already a member? <Link to="/">Sign In</Link></p>
         </div>
       </div>
       </div>

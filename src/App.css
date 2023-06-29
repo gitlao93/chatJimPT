@@ -174,11 +174,20 @@ li.list-group-item:hover {
 }
 
 .chatters-message-container {
-    width: 50%;
+    max-width: 50%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    
 }
+
+.sender .chatters-message-container {
+    align-items: flex-end;
+}
+
+.reply .chatters-message-container {
+    align-items: flex-start;
+}
+
 
 .chatters-message-container span {
     margin-top: 10px;

@@ -20,10 +20,12 @@ export default function Login() {
         email: email,
         password: password,
       });
-
       if (response.status === 202) {
         const token = response.data.data.token;
+        const id = response.data.data.user.id;
+        
         Cookies.set('token', token);
+        Cookies.set('id', id);
         window.location.reload();
         
       } else {
