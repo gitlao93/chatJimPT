@@ -31,7 +31,7 @@ export default function Login() {
         console.log(response);
         setLoggedIn(true);
         console.log(isLoggedIn)
-        navigate('/dashboard');
+        navigate('/');
 
         
       } else {

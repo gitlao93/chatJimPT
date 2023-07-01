@@ -1,61 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import ChatSubmit from './ChatSubmit';
 
-export default function ChatArea () {
-    const [chat, setChat] = useState('');
+export default function ChatArea ({ conversationId }) {
     const [messages, setMessages] = useState([]);
 
-    const handleChat = async (e) => {
-        e.preventDefault();
-
-        // try{
-        //     // const response = await axios.post('http://127.0.0.1:8000/api/message/2',
-        //     //     {
-        //     //       content: chat
-        //     //     },
-        //     //     {
-        //     //       headers: {
-        //     //         'Accept': 'application/vnd.api+json',
-        //     //         'Content-Type': 'application/vnd.api+json',
-        //     //         Authorization: `Bearer ${Cookies.get('token')}`,
-        //     //       }
-        //     //     }
-        //     //   );
-
-        //     // if(response.status === 200){
-        //     //     console.log('sent');
-        //     // }else{
-        //     //     console.log('error');
-        //     }
-        // }catch(error){
-        //     // console.log(error);
-        // }
-
-    }
-
+   
     useEffect(() => {
-        // const fetchConversationMessage = async () => {
-        //     try {
-        //         const messageresponse = await axios.get('http://127.0.0.1:8000/api/convo_message', {
-        //             headers: {
-        //                 Authorization: `Bearer ${Cookies.get('token')}`,
-        //             },
-        //         });
-                
-        //         if (messageresponse.status === 200) {
-        //             setMessages(messageresponse.data.data);
-        //         } else {
-        //             console.log('Error fetching conversations');
-        //         }
-        //     } catch (error) {
-        //         console.error(error);
-        //     }
-        // };
+        const fetchConversationMessage = async () => {
+            try {
+                const messageresponse = await axios.get(`http://127.0.0.1:8000/api/conversation/${conversationId}`, {
+                    headers: {
+                        'Accept': 'application/vnd.api+json',
+                        'Content-Type': 'application/vnd.api+json',
+                        Authorization: `Bearer ${Cookies.get('token')}`,
+                    },
+                });
 
-        // fetchConversationMessage();
+                if (messageresponse.status === 200) {
+                    setMessages(messageresponse.data.messages);
+                } else {
+                    console.log('Error fetching conversations');
+                }
+            } catch (error) {
+                console.error(error,'notfound');
+            }
+        };
+
+        fetchConversationMessage();
         
-    }, []);
+    }, [conversationId]);
 
    
     return (
@@ -70,7 +45,7 @@ export default function ChatArea () {
             <div className="chat-message-container overflow-auto border-bottom-primary p-3">
                 {messages.map((message, index) => (
                     
-                    <div className={`chat-message-wrapper ${message.message_from == Cookies.get('id') ? 'sender' : 'reply'}`} key={index} >
+                    <div className={`chat-message-wrapper ${message.sender_id == Cookies.get('id') ? 'sender' : 'reply'}`} key={index} >
                         <div className="chatters-info-container">
                             <div className="chatters-img">
                                 <img
@@ -82,7 +57,7 @@ export default function ChatArea () {
                         </div>
                         <div className="chatters-message-container">
                             <div className="chatters-message-wrapper">
-                                <p className="chatters-message text-white">{message.message}</p>
+                                <p className="chatters-message text-white">{message.content}</p>
                             </div>
                             <span className="text-white">{message.created_at}</span>
                         </div>
@@ -91,21 +66,7 @@ export default function ChatArea () {
             </div>
                 {/* Chat body container  -- ends here*/}
 
-            {/* Submit container */}
-            <div className="chat-submit-container border-bottom-primary p-3">
-            <form className="row h-100" onSubmit={handleChat}>
-                <div className="col-9">
-                    <div className="form-floating">
-                        <textarea className="form-control" placeholder="Message" id="floatingTextarea2" value={chat} onChange={(e) => setChat(e.target.value)}/>
-                        <label htmlFor="floatingTextarea2">Message</label>
-                    </div>
-                </div>
-                <div className="col-3">
-                    <button type="submit" className="btn btn-primary w-100 h-100 mx-auto">Send</button>
-                </div>
-                </form>
-            </div>
-            {/* Submit container -- ends here */}
+            <ChatSubmit />
             
         </div>
     );
