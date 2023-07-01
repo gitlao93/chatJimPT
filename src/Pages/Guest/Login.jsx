@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import {  Link  } from 'react-router-dom';
+import {  Link,useNavigate  } from 'react-router-dom';
 
 
 export default function Login() {
+  const navigate = useNavigate();
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -20,16 +22,26 @@ export default function Login() {
         email: email,
         password: password,
       });
-      if (response.status === 202) {
+      if (response.status === 200) {
         const token = response.data.data.token;
-        const id = response.data.data.user.id;
+        const id = response.data.data.user.user_id;
         
         Cookies.set('token', token);
         Cookies.set('id', id);
-        window.location.reload();
+        console.log(response);
+        setLoggedIn(true);
+        console.log(isLoggedIn)
+        navigate('/dashboard');
+
         
       } else {
         console.error('Login failed',response.status);
+      }
+
+
+      if (isLoggedIn) {
+        // Redirect to the dashboard page
+        return null; // or display a loading state while redirecting
       }
     
     } catch (error) {

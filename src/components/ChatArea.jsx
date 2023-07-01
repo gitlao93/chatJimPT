@@ -9,54 +9,51 @@ export default function ChatArea () {
     const handleChat = async (e) => {
         e.preventDefault();
 
-        try{
-            const response = await axios.post('http://127.0.0.1:8000/api/chats',
-                {
-                  message: chat,
-                  message_from: Cookies.get('id'),
-                  message_to: '2'
-                },
-                {
-                  headers: {
-                    'Accept': 'application/vnd.api+json',
-                    'Content-Type': 'application/vnd.api+json',
-                    Authorization: `Bearer ${Cookies.get('token')}`,
-                  }
-                }
-              );
+        // try{
+        //     // const response = await axios.post('http://127.0.0.1:8000/api/message/2',
+        //     //     {
+        //     //       content: chat
+        //     //     },
+        //     //     {
+        //     //       headers: {
+        //     //         'Accept': 'application/vnd.api+json',
+        //     //         'Content-Type': 'application/vnd.api+json',
+        //     //         Authorization: `Bearer ${Cookies.get('token')}`,
+        //     //       }
+        //     //     }
+        //     //   );
 
-            if(response.status === 202){
-                console.log('sent');
-                window.location.reload();
-            }else{
-                console.log('error');
-            }
-        }catch(error){
-            console.log(error);
-        }
+        //     // if(response.status === 200){
+        //     //     console.log('sent');
+        //     // }else{
+        //     //     console.log('error');
+        //     }
+        // }catch(error){
+        //     // console.log(error);
+        // }
 
     }
 
     useEffect(() => {
-        const fetchConversationMessage = async () => {
-            try {
-                const messageresponse = await axios.get('http://127.0.0.1:8000/api/convo_message/2', {
-                    headers: {
-                        Authorization: `Bearer ${Cookies.get('token')}`,
-                    },
-                });
+        // const fetchConversationMessage = async () => {
+        //     try {
+        //         const messageresponse = await axios.get('http://127.0.0.1:8000/api/convo_message', {
+        //             headers: {
+        //                 Authorization: `Bearer ${Cookies.get('token')}`,
+        //             },
+        //         });
                 
-                if (messageresponse.status === 200) {
-                    setMessages(messageresponse.data);
-                } else {
-                    console.log('Error fetching conversations');
-                }
-            } catch (error) {
-                console.error(error);
-            }
-        };
+        //         if (messageresponse.status === 200) {
+        //             setMessages(messageresponse.data.data);
+        //         } else {
+        //             console.log('Error fetching conversations');
+        //         }
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
+        // };
 
-        fetchConversationMessage();
+        // fetchConversationMessage();
         
     }, []);
 

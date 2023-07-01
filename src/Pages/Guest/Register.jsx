@@ -15,14 +15,14 @@ export default function Register() {
 
     try{
       
-      const response = await axios.post('http://127.0.0.1:8000/api/register',{
+      const response = await axios.post('http://127.0.0.1:8000/api/store',{
         name: name,
         email: email,
         password: password,
         password_confirmation: passwordConfirmation
       })
 
-      if(response.status === 202){
+      if(response.status === 200){
 
         // Extract the token from the response
         const token = response.data.data.token;

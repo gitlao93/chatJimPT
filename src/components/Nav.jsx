@@ -19,7 +19,7 @@ export default function Nav() {
         },
       });
 
-      if (response.status === 202) {
+      if (response.status === 200) {
         Cookies.remove('token');
         window.location.reload();
       } else {
