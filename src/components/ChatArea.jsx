@@ -65,7 +65,7 @@ export default function ChatArea ({ conversationId }) {
                 ))}
             </div>
                 {/* Chat body container  -- ends here*/}
-            
+                    
             <ChatSubmit />
             
         </div>
