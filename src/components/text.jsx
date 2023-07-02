@@ -3,8 +3,8 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import ChatSubmit from './ChatSubmit';
 
-export default function ChatArea({ conversationId, conversationName, userId ,userName}) {
-    console.log(userName)
+export default function ChatArea({ conversationId, userId }) {
+    
     const [conversationData, setConversationData] = useState([]);
     const [groupMembers, setGroupMembers] = useState(null);
     useEffect(() => {
@@ -60,25 +60,20 @@ export default function ChatArea({ conversationId, conversationName, userId ,use
         }
       }, [conversationId]);
     
-      console.log( );
+      
 
   return (
-    <div className="d-flex flex-column w-100">
+    <div className="d-flex flex-column w-80">
       {/* name container */}
       <div className="chat-name-container border-bottom-primary p-3">
-        <h2 className="text-white"> {conversationName == '' ? userName : conversationName}</h2>
+        <h2 className="text-white">Name of the friend</h2>
       </div>
       {/* name container  -- ends here*/}
 
       {/* Chat body container */}
       <div className="chat-message-container overflow-auto border-bottom-primary p-3">
-        {
-        conversationData == 'no message' ?
-        (
-          <div className="text-white text-center mt-5">No conversation</div>
-        ) :
-        (conversationData.map((message, index) => (
-          <div className={`chat-message-wrapper ${message.sender_id == Cookies.get('id') ? 'sender' : 'reply'}`} key={index}>
+        {conversationData.map((message, index) => (
+          <div className={`chat-message-wrapper ${message.sender_id === Cookies.get('id') ? 'sender' : 'reply'}`} key={index}>
             <div className="chatters-info-container">
               <div className="chatters-img">
                 <img
@@ -95,8 +90,7 @@ export default function ChatArea({ conversationId, conversationName, userId ,use
               <span className="text-white">{message.created_at}</span>
             </div>
           </div>
-        )))
-        }
+        ))}
         {/* {messages.length === 0 && <p>{messagesIsEmpty}</p>} */}
       </div>
       {/* Chat body container  -- ends here*/}
