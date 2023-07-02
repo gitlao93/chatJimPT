@@ -32,6 +32,7 @@ export default function Login() {
         setLoggedIn(true);
         console.log(isLoggedIn)
         navigate('/');
+        window.location.reload();
 
         
       } else {

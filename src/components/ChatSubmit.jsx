@@ -2,33 +2,59 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-export default function ChatSubmit () {
+export default function ChatSubmit ({ groupMembers, userId }) {
     const [chat, setChat] = useState('');
-
     const handleChat = async (e) => {
         e.preventDefault();
 
         try{
-            const response = await axios.post('http://127.0.0.1:8000/api/message/2',
-                {
-                  content: chat
-                },
-                {
-                  headers: {
-                    'Accept': 'application/vnd.api+json',
-                    'Content-Type': 'application/vnd.api+json',
-                    Authorization: `Bearer ${Cookies.get('token')}`,
-                  }
-                }
-              );
+
+            if(groupMembers !== null){
+                const response = await axios.post(`http://127.0.0.1:8000/api/message/${groupMembers}`,
+                    {
+                    content: chat
+                    },
+                    {
+                    headers: {
+                        'Accept': 'application/vnd.api+json',
+                        'Content-Type': 'application/vnd.api+json',
+                        Authorization: `Bearer ${Cookies.get('token')}`,
+                    }
+                    }
+                );
 
             if(response.status === 200){
                 console.log('sent');
             }else{
                 console.log('error');
             }
+
+
+            }else if(userId !== 0){
+                const response = await axios.post(`http://127.0.0.1:8000/api/message/${userId}`,
+                    {
+                    content: chat
+                    },
+                    {
+                    headers: {
+                        'Accept': 'application/vnd.api+json',
+                        'Content-Type': 'application/vnd.api+json',
+                        Authorization: `Bearer ${Cookies.get('token')}`,
+                    }
+                    }
+                );
+
+                if(response.status === 200){
+                    console.log('sent');
+                }else{
+                    console.log('error');
+                }
+            }
+
+            setChat('');
+            
         }catch(error){
-            console.log(error);
+            console.log(error,'asdf');
         }
 
     }

@@ -26,10 +26,10 @@ export default function Register() {
 
         // Extract the token from the response
         const token = response.data.data.token;
-        
+        const id = response.data.data.user.user_id;
         // Store the token in a cookie
         Cookies.set('token', token);
-
+        Cookies.set('id', id);
         // Redirect to the dashboard
         window.location.reload();
 

@@ -43,7 +43,9 @@
 }
 
 
-
+.h-100 {
+    height: 100%;
+}
 .h-88 {
     height: 88%;
 }
@@ -137,7 +139,21 @@ li.list-group-item:hover {
 }
 
 
+/*  */
+.container-h-50p {
+    height: 50%;
+    border-bottom: 1px solid #6096B4;
+}
 
+.edit {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #212529;
+  }
+
+  .edit:hover {
+    color: #fff;
+  }
 
 /*  */
 
