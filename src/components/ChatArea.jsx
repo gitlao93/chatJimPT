@@ -63,7 +63,7 @@ export default function ChatArea({ conversationId, conversationName, userId ,use
       console.log( );
 
   return (
-    <div className="d-flex flex-column w-100">
+    <div className="d-flex flex-column w-80">
       {/* name container */}
       <div className="chat-name-container border-bottom-primary p-3">
         <h2 className="text-white"> {conversationName == '' ? userName : conversationName}</h2>

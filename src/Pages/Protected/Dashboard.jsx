@@ -36,7 +36,7 @@ export default function Dashboard() {
     return (
         <div className="container-fluid bg-dark h-88 p-0 overflow-hidden">
             <div className="d-flex h-100 justify-content-between">
-                <div className='d-flex flex-column'>
+                <div className='d-flex flex-column w-20'>
                     <ConvoList onSelectConversation={handleSelectConversation} onSelectConversationName={handleSelectConversationname}/>
                     <UsersList onSelectUser={handleSelectUser} onSelectUserName={handleSelectUserName}/>
                 </div>

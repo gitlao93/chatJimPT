@@ -78,7 +78,7 @@ export default function ConvoList({ onSelectConversation, onSelectConversationNa
       
     return (
         
-            <div className="container-fluid container-h-50p border-end-primary w-20 px-1 py-0 overflow-auto">
+            <div className="container-fluid container-h-50p border-end-primary w-30 px-1 py-0 overflow-auto">
                 <h3 className="text-white px-4 py-2 sticky-top bg-dark">Conversation</h3>
                 <ul className="list-group list-group-flush mt-3">
                     
