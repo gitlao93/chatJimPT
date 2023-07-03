@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import ChatSubmit from './ChatSubmit';
+import Pusher from 'pusher-js';
 
 export default function ChatArea({ conversationId, conversationName, userId ,userName}) {
     
     const [conversationData, setConversationData] = useState([]);
+    
     const [groupMembers, setGroupMembers] = useState(null);
     useEffect(() => {
         const fetchData = async () => {
@@ -31,11 +33,12 @@ export default function ChatArea({ conversationId, conversationName, userId ,use
             setConversationData(response.data.messages);
             setGroupMembers(null);
           } catch (error) {
-            setConversationData(['no message']);
+            // setConversationData(['no message']);
           }
         };
     
         fetchData();
+        
       }, [conversationId, userId]);
     
       useEffect(() => {
@@ -59,7 +62,36 @@ export default function ChatArea({ conversationId, conversationName, userId ,use
           fetchMemberData();
         }
       }, [conversationId]);
-    
+
+      useEffect(() => {
+        Pusher.logToConsole = true;
+
+        const pusher = new Pusher('af6a08f9b1658b9a2db9', {
+          cluster: 'ap1'
+        });
+
+        const channel = pusher.subscribe('notification');
+        channel.bind('MessageNotificationt', function (data) {
+          setConversationData((prevData) => [...prevData, data.message]);
+          console.log(data)
+        });
+
+        // Define the callback function
+        const handleNotification = (data) => {
+          setConversationData((prevData) => [...prevData, data.message]);
+          console.log(data)
+        };
+
+        // Bind the callback function to the 'MessageNotificationt' event
+        channel.bind('messagenotification', handleNotification);
+
+        // Clean up the subscription and callback when the component unmounts
+        return () => {
+          channel.unbind('messagenotification', handleNotification);
+          pusher.unsubscribe('notification');
+        };
+      }, []);
+    console.log(conversationData)
 
   return (
     <div className="d-flex flex-column w-80">
