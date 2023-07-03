@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import ChatSubmit from './ChatSubmit';
 
 export default function ChatArea({ conversationId, conversationName, userId ,userName}) {
-    console.log(userName)
+    
     const [conversationData, setConversationData] = useState([]);
     const [groupMembers, setGroupMembers] = useState(null);
     useEffect(() => {
@@ -60,10 +60,9 @@ export default function ChatArea({ conversationId, conversationName, userId ,use
         }
       }, [conversationId]);
     
-      console.log( );
 
   return (
-    <div className="d-flex flex-column w-100">
+    <div className="d-flex flex-column w-80">
       {/* name container */}
       <div className="chat-name-container border-bottom-primary p-3">
         <h2 className="text-white"> {conversationName == '' ? userName : conversationName}</h2>
