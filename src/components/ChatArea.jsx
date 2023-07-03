@@ -63,6 +63,7 @@ export default function ChatArea({ conversationId, conversationName, userId ,use
         }
       }, [conversationId]);
 
+
       useEffect(() => {
         Pusher.logToConsole = true;
 
