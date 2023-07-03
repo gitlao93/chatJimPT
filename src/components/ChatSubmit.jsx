@@ -6,7 +6,8 @@ export default function ChatSubmit ({ groupMembers, userId }) {
     const [chat, setChat] = useState('');
     const handleChat = async (e) => {
         e.preventDefault();
-
+        console.log('gm' + groupMembers)
+        console.log('u' + userId)
         try{
 
             if(groupMembers !== null){

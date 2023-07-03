@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import ChatSubmit from './ChatSubmit';
 
 export default function ChatArea({ conversationId, conversationName, userId ,userName}) {
-    console.log(userName)
+    
     const [conversationData, setConversationData] = useState([]);
     const [groupMembers, setGroupMembers] = useState(null);
     useEffect(() => {
@@ -60,7 +60,6 @@ export default function ChatArea({ conversationId, conversationName, userId ,use
         }
       }, [conversationId]);
     
-      console.log( );
 
   return (
     <div className="d-flex flex-column w-80">
