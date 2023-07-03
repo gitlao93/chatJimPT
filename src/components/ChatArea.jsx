@@ -131,8 +131,10 @@ export default function ChatArea({ conversationId, conversationName, userId ,use
         {/* {messages.length === 0 && <p>{messagesIsEmpty}</p>} */}
       </div>
       {/* Chat body container  -- ends here*/}
-
-      <ChatSubmit groupMembers={groupMembers} userId={userId} />
+      {
+        conversationName == '' && userName == ''?  <div> </div>  : <ChatSubmit groupMembers={groupMembers} userId={userId} />
+      }
+      
 
     </div>
   );
